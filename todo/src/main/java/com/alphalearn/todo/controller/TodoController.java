@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Author: Karthik
- * Date: 6/11/2023
+ * Author: Tal Arnon
+ * Date: 07/11/2025
  * Time: 1:01 PM
  */
 
@@ -47,7 +47,7 @@ public class TodoController {
 
     @PostMapping("/todos")
     public ResponseEntity<Object> createTodo(@RequestBody Todo todo) {
-        Todo createdTodo = todoRepository.addNew(new Todo(todo.getSubject()));
+        Todo createdTodo = todoRepository.addNew(todo);
         return ResponseHandler.buildResponse(
                 true,
                 HttpStatus.OK,

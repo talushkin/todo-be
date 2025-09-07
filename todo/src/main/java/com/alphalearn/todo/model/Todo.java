@@ -1,10 +1,11 @@
+
 package com.alphalearn.todo.model;
 
 import jakarta.persistence.*;
 
 /**
- * Author: Karthik
- * Date: 6/11/2023
+ * Author: Tal Arnon
+ * Date: 07/11/2025
  * Time: 11:17 AM
  */
 
@@ -18,26 +19,50 @@ public class Todo {
     @Column(name = "todo_id")
     private Long id;
 
-    @Column(name = "todo_subject")
-    private String subject;
+    @Column(name = "title", nullable = false)
+    private String title;
 
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "due_date")
+    private java.sql.Date dueDate;
+
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    @Column(name = "assignee")
+    private String assignee;
 
     public Todo() { }
 
-    public Todo(String subject) {
-        this.subject = subject;
+    public Todo(String title, String description, java.sql.Date dueDate, Status status, String assignee) {
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.status = status;
+        this.assignee = assignee;
     }
 
-    public Todo(Long id, String subject) {
+    public Todo(Long id, String title, String description, java.sql.Date dueDate, Status status, String assignee) {
         this.id = id;
-        this.subject = subject;
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.status = status;
+        this.assignee = assignee;
     }
 
     @Override
     public String toString() {
         return "Todo{" +
                 "id=" + id +
-                ", subject='" + subject + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", dueDate=" + dueDate +
+                ", status=" + status +
+                ", assignee='" + assignee + '\'' +
                 '}';
     }
 
@@ -49,11 +74,50 @@ public class Todo {
         this.id = id;
     }
 
-    public String getSubject() {
-        return subject;
+    public String getTitle() {
+        return title;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public java.sql.Date getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(java.sql.Date dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public String getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
+    }
+
+    public enum Status {
+        open,
+        in_progress,
+        completed,
+        any
     }
 }
