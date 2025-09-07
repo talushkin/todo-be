@@ -1,0 +1,5 @@
+com\alphalearn\todo\response\ResponseHandler.class
+com\alphalearn\todo\TodoApplication.class
+com\alphalearn\todo\controller\TodoController.class
+com\alphalearn\todo\model\Todo.class
+com\alphalearn\todo\repository\TodoRepository.class
