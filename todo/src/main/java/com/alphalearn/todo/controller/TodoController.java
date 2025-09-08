@@ -18,9 +18,18 @@ import java.util.List;
 
 @RestController
 public class TodoController {
+    @GetMapping("/todo/last")
+    public ResponseEntity<Object> getLastTodoId() {
+        List<Todo> todos = todoRepository.fetchAllTodos();
+        long maxId = todos.stream().mapToLong(Todo::getId).max().orElse(0);
+        java.util.Map<String, Object> response = new java.util.HashMap<>();
+        response.put("maxID", maxId);
+        return ResponseHandler.buildResponse(true, HttpStatus.OK, response, null);
+    }
 
     @Autowired
     private TodoRepository todoRepository;
+
 
     @GetMapping("/todos")
     public ResponseEntity<Object> fetchAllTods() {
