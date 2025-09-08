@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.9.0",
+    "@types/styled-components": "^5.1.34",
+    "axios": "^1.11.0",
+    "next": "^15.5.2",
+    "react-redux": "^9.2.0",
+    "react-toastify": "^11.0.5",
+    "styled-components": "^6.1.19"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "nodemon": "nodemon --watch . --ext ts,tsx,js,json --exec \"next dev\""
+  },
+  "devDependencies": {
+    "@types/node": "24.3.1",
+    "typescript": "5.9.2"
+  }
+}
