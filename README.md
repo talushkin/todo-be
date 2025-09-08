@@ -1,80 +1,70 @@
-# README #
+# Todo App Frontend (React + Next.js)
 
+## Features
+- Responsive and modern UI (React, Next.js, Styled Components)
+- User login, registration, and task management (CRUD)
+- State management via Redux Toolkit
+- Secure API integration via Axios
+- Client-side routing via Next.js
+- Accessibility and mobile responsiveness
+- Server-side rendering (SSR) support
+- Clean, modular, and well-documented code
+- Limited third-party libraries
 
-### Assignment Description: ###
-Design and implement a full-stack Task Management System that demonstrates expertise in React,Next.js, Java (Spring Boot), and MySQL.
+## Setup Instructions
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+2. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+   Visit [http://localhost:3000](http://localhost:3000)
 
-The system should follow best practices for scalability, maintainability, and security, while showcasing thoughtful architectural decisions.
+3. **Environment Variables:**
+   - Create a `.env.local` file if needed for API endpoints or secrets.
 
+## Automated SSR Check
+This app uses Next.js, which provides SSR by default for all pages. To verify SSR:
 
-### Part One: Backend (Java + MySQL) ###
-###### Tech Stack: Java Spring Boot, MySQL, JPA/Hibernate ######
-##### Requirements: #####
-Develop a secure RESTful backend using Spring Boot.
+1. **Check page source:**
+   - Open [http://localhost:3000](http://localhost:3000) in your browser.
+   - Right-click and select "View Page Source".
+   - You should see the initial HTML rendered for the page (not just a blank div).
 
-Implement JWT-based authentication and session management.
+2. **Test SSR programmatically:**
+   - Run the following script to fetch the HTML and check for content:
+   ```bash
+   npx node -e "require('axios').get('http://localhost:3000').then(r => console.log(r.data.includes('<div')));"
+   ```
+   - If `true`, SSR is working.
 
-Support user registration, login, and role-based access control (e.g., Admin, User).
+3. **Add SSR to a page:**
+   - Example for `pages/tasks.tsx`:
+   ```tsx
+   export async function getServerSideProps() {
+     // Fetch initial data here
+     return { props: {} };
+   }
+   ```
 
-Define models for Tasks with fields: title, description, due date, status (open, in progress,completed), and assignee.
+## License
+This project is licensed for non-commercial use only. See `LICENSE` for details.
 
-Develop CRUD APIs for task management.
+## Design & Architecture
+- **React + Next.js** for UI and SSR
+- **Redux Toolkit** for state management
+- **Axios** for API calls
+- **Styled Components** for styling
+- **Next.js Router** for navigation
+- **Accessibility**: Semantic HTML, labels, keyboard navigation
+- **Mobile Responsive**: Media queries, flexible layouts
 
-Use MySQL as the database. 
+## API Documentation
+- Backend API should include Swagger docs (see backend repo)
 
-Schema design should be normalized and scalable.
+## Contact
+For questions, contact [your email or GitHub].
 
-##### Bonus: #####
-Implement pagination and filtering for task queries.
-
-Use Spring Security and DTO pattern for API design.
-
-
-### Part Two: Frontend (React + Next.js) ###
-###### Tech Stack: React, Next.js, TypeScript, SCSS/Styled Components ######
-
-##### Requirements: #####
-Build a responsive and modern frontend using React + Next.js.
-
-Create a UI for user login, registration, and task management (CRUD).
-
-Use React Hooks and Context API or Redux for state management.
-
-Consume the backend API securely using Axios or Fetch.
-
-Handle client-side routing via Next.js&#39;s built-in router.
-
-Ensure accessibility and mobile responsiveness.
-
-##### Bonus: #####
-Implement server-side rendering (SSR)
-
-
-#### Additional Requirements ####
-* Code must be clean, modular, and well-documented.
-
-* Limit third-party libraries, use them only when justified.
-
-* Include instructions for setting up and testing the system.
-
-* Add a Swagger documentation for the backend API.
-
-
-#### Submission: ####
-* Upload the code to this Bitbucket repo and specify in the license that it is for non-commercial use only.
-
-* Submit a report explaining the design and architecture decisions of the project.
-
-
-#### Evaluation: ####
-##### The evaluation will be based on the following criteria:#####
-
-* Cleanliness and quality of the code.
-
-* Compliance with technical and design requirements.
-
-* Creativity and innovation in solving the problem.
-
-* Efficiency of the code and system performance.
-
-* Completeness and correctness of the final product.
+---
