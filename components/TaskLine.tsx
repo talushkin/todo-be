@@ -1,3 +1,6 @@
+// TaskLine: renders a single task row in the tasks table.
+// Handles display, click, and delete logic for each task.
+// 2025-09-08
 import React from 'react';
 import styled from 'styled-components';
 

@@ -1,3 +1,6 @@
+// Main tasks page: displays, sorts, and manages tasks with CRUD and filtering.
+// Integrates Redux, toast feedback, and responsive design for all users.
+// 2025-09-07
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';

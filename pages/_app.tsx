@@ -1,4 +1,7 @@
 
+// Main app wrapper for Redux, Toast notifications, and page rendering.
+// Ensures global state and feedback are available on all pages.
+// 2025-09-08
 import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
 import { store } from '../store';

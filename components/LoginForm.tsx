@@ -1,3 +1,6 @@
+// LoginForm: login form for user authentication.
+// Handles input, validation, and Redux login logic.
+// 2025-09-08
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';

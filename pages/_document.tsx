@@ -1,3 +1,6 @@
+// Custom Document for styled-components SSR integration in Next.js.
+// Ensures style consistency between server and client rendering.
+// 2025-09-08
 import Document, { DocumentContext } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 import React from 'react';

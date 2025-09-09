@@ -1,3 +1,6 @@
+// TopBar: fixed header showing user info and logout button.
+// Uses Redux for username and styled-components for layout.
+// 2025-09-08
 import React from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';

@@ -1,3 +1,6 @@
+// LoginRedirect: wrapper to redirect authenticated users away from login.
+// Ensures only unauthenticated users see login/register forms.
+// 2025-09-08
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';

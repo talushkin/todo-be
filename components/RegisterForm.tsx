@@ -1,3 +1,6 @@
+// RegisterForm: registration form for new users.
+// Handles input, validation, and API call for sign-up.
+// 2025-09-08
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';

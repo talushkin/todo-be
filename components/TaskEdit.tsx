@@ -1,3 +1,6 @@
+// TaskEdit: popup form for editing or adding a task.
+// Handles form state, validation, and feedback via toast.
+// 2025-09-07
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
