@@ -1,3 +1,6 @@
+// authSlice: Redux slice for authentication state and login/logout logic.
+// Manages token, username, email, and error state with API calls.
+// 2025-09-08
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 

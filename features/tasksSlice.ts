@@ -13,6 +13,9 @@ export const updateTask = createAsyncThunk(
     }
   }
 );
+// tasksSlice: Redux slice for managing tasks state and async actions.
+// Handles fetching, updating, and deleting tasks with API integration.
+// 2025-09-08
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { Task } from '../components/TaskLine';
