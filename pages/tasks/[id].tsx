@@ -7,6 +7,7 @@ import { fetchTasks } from '../../features/tasksSlice';
 import styled from 'styled-components';
 import TaskLine, { Task } from '../../components/TaskLine';
 import TaskEdit from '../../components/TaskEdit';
+import { toast } from 'react-toastify';
 
 const Table = styled.table`
   width: 100%;
@@ -59,6 +60,17 @@ const TaskEditPage: React.FC = () => {
   const { tasks, loading, error } = useSelector((state: RootState) => state.tasks);
   const [sortBy, setSortBy] = React.useState<string>('id');
   const [sortDir, setSortDir] = React.useState<'asc' | 'desc'>('asc');
+
+  React.useEffect(() => {
+    // Redirect to login if no token
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        toast.error('You must log in to see tasks!');
+        router.replace('/login');
+      }
+    }
+  }, []);
 
   React.useEffect(() => {
     if (!tasks.length) dispatch(fetchTasks());

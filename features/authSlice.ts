@@ -5,12 +5,16 @@ interface AuthState {
   token: string | null;
   loading: boolean;
   error: string | null;
+  username: string | null;
+  email: string | null;
 }
 
 const initialState: AuthState = {
   token: typeof window !== 'undefined' ? localStorage.getItem('token') : null,
   loading: false,
   error: null,
+  username: typeof window !== 'undefined' ? localStorage.getItem('username') : null,
+  email: typeof window !== 'undefined' ? localStorage.getItem('email') : null,
 };
 
 export const loginUser = createAsyncThunk(
@@ -20,6 +24,8 @@ export const loginUser = createAsyncThunk(
       const response = await axios.post('http://localhost:8080/auth/login', credentials);
       if (response.data?.data?.token) {
         localStorage.setItem('token', response.data.data.token);
+        localStorage.setItem('username', credentials.username); // Store username in localStorage
+        localStorage.setItem('email', response.data.data.email); // Store email in localStorage
         return response.data.data.token;
       } else {
         // Custom error handling based on backend response
@@ -44,7 +50,11 @@ const authSlice = createSlice({
   reducers: {
     logout(state) {
       state.token = null;
+      state.username = null;
+      state.email = null;
       localStorage.removeItem('token');
+      localStorage.removeItem('username');
+      localStorage.removeItem('email');
     },
   },
   extraReducers: (builder) => {
@@ -57,6 +67,10 @@ const authSlice = createSlice({
         state.loading = false;
         state.token = action.payload;
         state.error = null;
+        if (typeof window !== 'undefined') {
+          state.username = localStorage.getItem('username');
+          state.email = localStorage.getItem('email');
+        }
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;

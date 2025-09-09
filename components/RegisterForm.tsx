@@ -5,24 +5,6 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Link from 'next/link';
 
-const Container = styled.div`
-  width: 50vw;
-  max-width: 400px;
-  min-width: 300px;
-  margin: 0 auto;
-  padding: 2rem;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  @media (max-width: 900px) {
-    width: 90vw;
-    min-width: 0;
-    max-width: none;
-    padding: 1rem;
-    box-shadow: none;
-  }
-`;
-
 const Error = styled.div`
   color: red;
   margin-bottom: 1rem;
@@ -61,8 +43,47 @@ const RegisterForm: React.FC = () => {
     }
   };
 
+  // Responsive style state
+  const [responsiveStyle, setResponsiveStyle] = React.useState({
+    width: '50vw',
+    maxWidth: 400,
+    minWidth: 300,
+    padding: '2rem',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+  });
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const isMobile = window.innerWidth <= 900;
+      setResponsiveStyle(
+        isMobile
+          ? {
+              width: '90vw',
+              minWidth: 0,
+              maxWidth: 9999,
+              padding: '1rem',
+              boxShadow: 'none',
+            }
+          : {
+              width: '50vw',
+              maxWidth: 400,
+              minWidth: 300,
+              padding: '2rem',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+            }
+      );
+    }
+  }, []);
+
   return (
-    <Container>
+    <div
+      style={{
+        margin: '0 auto',
+        background: '#fff',
+        borderRadius: 8,
+        ...responsiveStyle,
+      }}
+    >
       <h2>Register</h2>
       {error && <Error>{error}</Error>}
       {success && <div style={{ color: 'green', marginBottom: '1rem' }}>{success}</div>}
@@ -105,7 +126,7 @@ const RegisterForm: React.FC = () => {
       <p>
         Already have an account? <Link href="/login">Login</Link>
       </p>
-    </Container>
+    </div>
   );
 };
 

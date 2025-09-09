@@ -7,24 +7,6 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
 
-const Container = styled.div`
-  width: 50vw;
-  max-width: 400px;
-  min-width: 300px;
-  margin: 0 auto;
-  padding: 2rem;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  @media (max-width: 900px) {
-    width: 90vw;
-    min-width: 0;
-    max-width: none;
-    padding: 1rem;
-    box-shadow: none;
-  }
-`;
-
 const Error = styled.div`
   color: red;
   margin-bottom: 1rem;
@@ -52,13 +34,57 @@ const LoginForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(loginUser({ username, password }));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('username', username);
+      // Save email if available (if you get it from backend)
+      // localStorage.setItem('email', email);
+    }
   };
 
+  // Responsive style state
+  const [responsiveStyle, setResponsiveStyle] = React.useState({
+    width: '50vw',
+    maxWidth: 400,
+    minWidth: 300,
+    padding: '2rem',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+  });
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const isMobile = window.innerWidth <= 900;
+      setResponsiveStyle(
+        isMobile
+          ? {
+              width: '90vw',
+              minWidth: 0,
+              maxWidth: 9999,
+              padding: '1rem',
+              boxShadow: 'none',
+            }
+          : {
+              width: '50vw',
+              maxWidth: 400,
+              minWidth: 300,
+              padding: '2rem',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+            }
+      );
+    }
+  }, []);
+
   return (
-    <Container>
+    <div
+      style={{
+        margin: '0 auto',
+        background: '#fff',
+        borderRadius: 8,
+        ...responsiveStyle,
+      }}
+    >
       <h2>Login</h2>
       {error && <Error>{error}</Error>}
-  {/* Toast handled globally by react-toastify */}
+      {/* Toast handled globally by react-toastify */}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username</label>
@@ -112,7 +138,7 @@ const LoginForm: React.FC = () => {
       <p>
         Don't have an account? <Link href="/register">Register</Link>
       </p>
-    </Container>
+    </div>
   );
 };
 

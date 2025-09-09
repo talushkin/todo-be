@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../features/authSlice';
+import { RootState } from '../store';
 
 const Bar = styled.div`
   width: 100vw;
@@ -40,6 +41,13 @@ const LogoutBtn = styled.button`
 
 const TopBar: React.FC = () => {
   const dispatch = useDispatch();
+  const username = useSelector((state: RootState) => state.auth.username);
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const handleLogout = () => {
     localStorage.removeItem('token');
     dispatch(logout());
@@ -47,9 +55,18 @@ const TopBar: React.FC = () => {
   };
   return (
     <Bar>
-      <LogoutBtn onClick={handleLogout} title="Logout">
-        <span role="img" aria-label="door">🚪</span> Logout
-      </LogoutBtn>
+      <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '1.5rem', minWidth: 0, overflow: 'hidden' }}>
+        {mounted && username && (
+          <span style={{ fontWeight: 500, color: '#222', fontSize: '1.1rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            User: {username}
+          </span>
+        )}
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', height: '100%', minWidth: 0, marginLeft: 'auto' }}>
+        <LogoutBtn onClick={handleLogout} title="Logout" style={{ maxWidth: '100%', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          <span role="img" aria-label="door">🚪</span> Logout
+        </LogoutBtn>
+      </div>
     </Bar>
   );
 };

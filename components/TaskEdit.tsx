@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { Task } from './TaskLine';
 
 const Popup = styled.div`
   position: fixed;
-  top: 0;
+  top: 70px;
   left: 0;
   width: 100vw;
   height: 100vh;
@@ -21,8 +22,8 @@ const EditContainer = styled.div`
   padding: 2rem;
   width: 100vw;
   height: 100vh;
-  min-width: 0;
-  max-width: none;
+  min-width: 100vw;
+  max-width: 100vw;
   box-shadow: none;
   display: flex;
   flex-direction: column;
@@ -30,7 +31,7 @@ const EditContainer = styled.div`
   align-items: flex-start;
   @media (min-width: 900px) {
     position: fixed;
-    top: 0;
+    top: 70px;
     right: 0;
     width: 50vw;
     height: 100vh;
@@ -67,9 +68,11 @@ interface TaskEditProps {
 const TaskEdit: React.FC<TaskEditProps> = ({ task, onClose, onSave, onDelete, assigneeOptions = [] }) => {
   const [showConfirm, setShowConfirm] = useState(false);
   const [form, setForm] = useState<Task | null>(task);
+  const [prevForm, setPrevForm] = useState<Task | null>(task);
 
   React.useEffect(() => {
     setForm(task);
+    setPrevForm(task);
   }, [task]);
 
   React.useEffect(() => {
@@ -88,7 +91,30 @@ const TaskEdit: React.FC<TaskEditProps> = ({ task, onClose, onSave, onDelete, as
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (form) onSave(form);
+    if (form) {
+      // Compare previous and new values
+      let changes: string[] = [];
+      if (prevForm) {
+        if (prevForm.title !== form.title) changes.push(`Title: "${prevForm.title}" → "${form.title}"`);
+        if (prevForm.description !== form.description) changes.push(`Description: "${prevForm.description}" → "${form.description}"`);
+        if (prevForm.dueDate !== form.dueDate) changes.push(`Due Date: "${prevForm.dueDate}" → "${form.dueDate}"`);
+        if (prevForm.status !== form.status) changes.push(`Status: "${prevForm.status}" → "${form.status}"`);
+        if (prevForm.assignee !== form.assignee) changes.push(`Assignee: "${prevForm.assignee}" → "${form.assignee}"`);
+      }
+      toast.success(
+        <div>
+          <strong>Task Saved</strong><br />
+          <span>{form.title}</span>
+          {changes.length > 0 && (
+            <ul style={{ margin: '0.5rem 0 0 0', padding: 0, listStyle: 'none' }}>
+              {changes.map((c, i) => <li key={i}>{c}</li>)}
+            </ul>
+          )}
+        </div>
+      );
+      setPrevForm(form);
+      onSave(form);
+    }
   };
 
   return (
