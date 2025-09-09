@@ -11,7 +11,6 @@ const Bar = styled.div`
   background: #f6f8fa;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   padding: 0 2rem;
   position: fixed;
@@ -37,6 +36,7 @@ const LogoutBtn = styled.button`
   gap: 0.5rem;
   font-weight: 500;
   z-index: 3100;
+  left: -50px;
 `;
 
 const TopBar: React.FC = () => {
@@ -55,18 +55,18 @@ const TopBar: React.FC = () => {
   };
   return (
     <Bar>
-      <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '1.5rem', minWidth: 0, overflow: 'hidden' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', minWidth: 0, overflow: 'hidden' }}>
         {mounted && username && (
           <span style={{ fontWeight: 500, color: '#222', fontSize: '1.1rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
             User: {username}
           </span>
         )}
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', height: '100%', minWidth: 0, marginLeft: 'auto' }}>
-        <LogoutBtn onClick={handleLogout} title="Logout" style={{ maxWidth: '100%', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+        <div style={{ display: 'flex', alignItems: 'center', height: '100%', minWidth: 0, marginLeft: '2rem' }}>
+          <LogoutBtn onClick={handleLogout} title="Logout" aria-label="Logout">
           <span role="img" aria-label="door">🚪</span> Logout
         </LogoutBtn>
-      </div>
+          </div>
     </Bar>
   );
 };
