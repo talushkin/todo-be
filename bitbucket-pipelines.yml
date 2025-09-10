@@ -1,0 +1,21 @@
+# Bitbucket Pipelines configuration for Spring Boot Maven app
+# Uses Maven 3.8.5 and OpenJDK 17 for compatibility with your project
+image: maven:3.8.5-openjdk-17
+
+pipelines:
+  default:
+    - parallel:
+      - step:
+          name: Build and Test
+          caches:
+            - maven
+          script:
+            - mvn -B verify --file pom.xml
+          after-script:
+            # Collect checkstyle results, if any, and convert to Bitbucket Code Insights.
+            - pipe: atlassian/checkstyle-report:0.3.0
+      - step:
+          name: Security Scan
+          script:
+            # Run a security scan for sensitive data.
+            - pipe: atlassian/git-secrets-scan:0.5.1
