@@ -43,4 +43,11 @@ public class TodoRepository {
         TypedQuery<Todo> namedQuery = entityManager.createNamedQuery("fetch_all_todos", Todo.class);
         return namedQuery.getResultList();
     }
+
+    public List<Todo> fetchTodosWithLimitSkip(int limit, int skip) {
+        TypedQuery<Todo> namedQuery = entityManager.createNamedQuery("fetch_all_todos", Todo.class);
+        namedQuery.setFirstResult(skip);
+        namedQuery.setMaxResults(limit);
+        return namedQuery.getResultList();
+    }
 }

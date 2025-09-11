@@ -1,7 +1,12 @@
 
-@token = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzU3MjUwMzMxLCJleHAiOjE3NTczMzY3MzF9.Zj785vnPiVZupGMdvuSxKbJruHtXUhKf9gqkqOiaUe8
-### Get all todos
+@token = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnVzZXIiLCJyb2xlIjoiQURNSU4iLCJlbWFpbCI6ImFkbWludXNlckBleGFtcGxlLmNvbSIsImlhdCI6MTc1NzUzNDg2NywiZXhwIjoxNzU3NjIxMjY3fQ.D2KO23Cr52hTeXwIMUnfNV_ydHWasLrKbWZwRQJCQaU
+
+### Get all todos (default pagination)
 GET http://localhost:8080/todos
+Authorization: Bearer {{token}}
+
+### Get todos with limit and skip
+GET http://localhost:8080/todos?limit=5&skip=10
 Authorization: Bearer {{token}}
 
 ### Get last todo ID
@@ -25,17 +30,18 @@ Content-Type: application/json
   "assignee": "Alice"
 }
 
-### Update a todo
+
+### Update todo 11 status to completed
 PUT http://localhost:8080/todos
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "id": 1,
+  "id": 11,
   "title": "Updated Task",
   "description": "Updated description",
   "dueDate": "2025-09-12",
-  "status": "in_progress",
+  "status": "completed",
   "assignee": "Bob"
 }
 

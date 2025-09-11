@@ -32,8 +32,10 @@ public class TodoController {
 
 
     @GetMapping("/todos")
-    public ResponseEntity<Object> fetchAllTods() {
-        List<Todo> todos = todoRepository.fetchAllTodos();
+    public ResponseEntity<Object> fetchTodosWithLimitSkip(
+            @RequestParam(value = "limit", required = false, defaultValue = "20") int limit,
+            @RequestParam(value = "skip", required = false, defaultValue = "0") int skip) {
+        List<Todo> todos = todoRepository.fetchTodosWithLimitSkip(limit, skip);
         return ResponseHandler.buildResponse(
                 true,
                 HttpStatus.OK,

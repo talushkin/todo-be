@@ -1,0 +1,15 @@
+springdoc:
+  swagger-ui:
+    # Enable "Try it out" and authorize with JWT
+    enabled: true
+    # Preauthorize with JWT token (if available)
+    # You can set a default token here if you want
+    # For basic auth, you can use username and password
+    # But for JWT, you need to login and paste the token
+    # Example below is for JWT, not basic auth
+    # If you want basic auth, set:
+    #   username: adminuser
+    #   password: adminpassword
+    # But Springdoc does not support basic auth login UI out of the box
+    # Instead, use JWT login endpoint, get token, and paste in Swagger UI
+    # See README for instructions
