@@ -115,9 +115,6 @@ public class Todo {
     }
 
     public enum Status {
-        open,
-        in_progress,
-        completed,
-        any
+        PENDING, IN_PROGRESS, DONE
     }
 }
