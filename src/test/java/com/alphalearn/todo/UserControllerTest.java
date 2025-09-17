@@ -32,6 +32,31 @@ public class UserControllerTest {
     }
 
     @Test
+    void testDuplicateUsernameReturnsConflict() throws Exception {
+        String userJson = "{" +
+                "\"username\":\"dupuser\"," +
+                "\"password\":\"pass\"," +
+                "\"email\":\"dup1@example.com\"," +
+                "\"role\":\"user\"}";
+        // First registration
+        mockMvc.perform(post("/auth/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(userJson))
+                .andExpect(status().isCreated());
+
+        // Second registration with the same username but different email
+        String userJson2 = "{" +
+                "\"username\":\"dupuser\"," +
+                "\"password\":\"pass2\"," +
+                "\"email\":\"dup2@example.com\"," +
+                "\"role\":\"user\"}";
+        mockMvc.perform(post("/auth/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(userJson2))
+                .andExpect(status().isConflict());
+    }
+
+    @Test
     void testLoginUser() throws Exception {
         // First, register the user
         String userJson = "{" +

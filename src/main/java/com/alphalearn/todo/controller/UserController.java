@@ -32,11 +32,15 @@ public class UserController {
         if (user.getRole() == null || user.getRole().isEmpty()) {
             return ResponseHandler.buildResponse(false, HttpStatus.BAD_REQUEST, null, "Role is required");
         }
-        if (userRepository.findByUsername(user.getUsername()) != null) {
-            return ResponseHandler.buildResponse(false, HttpStatus.BAD_REQUEST, null, "Username already exists");
+        // Normalize input (trim)
+        if (user.getUsername() != null) user.setUsername(user.getUsername().trim());
+        if (user.getEmail() != null) user.setEmail(user.getEmail().trim());
+
+        if (userRepository.existsByUsername(user.getUsername())) {
+            return ResponseHandler.buildResponse(false, HttpStatus.CONFLICT, null, "Username already exists");
         }
-        if (userRepository.findByEmail(user.getEmail()) != null) {
-            return ResponseHandler.buildResponse(false, HttpStatus.BAD_REQUEST, null, "Email already exists");
+        if (userRepository.existsByEmail(user.getEmail())) {
+            return ResponseHandler.buildResponse(false, HttpStatus.CONFLICT, null, "Email already exists");
         }
         userRepository.save(user);
         return ResponseHandler.buildResponse(true, HttpStatus.CREATED, user, null);
