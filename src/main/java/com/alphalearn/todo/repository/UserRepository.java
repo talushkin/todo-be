@@ -1,3 +1,4 @@
+// 17-09 updated: Added existsByUsername and existsByEmail for duplicate checks
 package com.alphalearn.todo.repository;
 
 import com.alphalearn.todo.model.User;

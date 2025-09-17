@@ -1,3 +1,4 @@
+// 17-09 updated: Enforce duplicate username/email checks and return 409
 package com.alphalearn.todo.controller;
 
 import com.alphalearn.todo.model.User;

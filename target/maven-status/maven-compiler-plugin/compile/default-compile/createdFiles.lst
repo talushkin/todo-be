@@ -1,4 +1,5 @@
 com\alphalearn\todo\response\ResponseHandler.class
+com\alphalearn\todo\response\GlobalExceptionHandler.class
 com\alphalearn\todo\model\Todo.class
 com\alphalearn\todo\repository\TodoRepository.class
 com\alphalearn\todo\repository\UserRepository.class

@@ -1,4 +1,5 @@
 @echo off
+REM 17-09 updated: Switched to Supabase Postgres connection variables
 REM Set JAVA_HOME and DB environment variables, then run Spring Boot app
 set JAVA_HOME=C:\Program Files\Java\jdk-17
 set DB_URL=jdbc:postgresql://db.atxcccbzfelpmvbodljk.supabase.co:5432/postgres

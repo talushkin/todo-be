@@ -1,4 +1,4 @@
--- Enforce uniqueness for username and email on Supabase (PostgreSQL)
+-- 17-09 updated: Enforce uniqueness for username and email on Supabase (PostgreSQL)
 -- Run in Supabase SQL editor
 
 -- Create unique indexes if they do not exist

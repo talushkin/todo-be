@@ -1,3 +1,4 @@
+// 17-09 updated: Added duplicate username conflict test
 package com.alphalearn.todo;
 
 import com.alphalearn.todo.model.User;
