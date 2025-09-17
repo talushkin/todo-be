@@ -8,7 +8,7 @@ RUN mvn -q -DskipTests=true clean package
 
 FROM eclipse-temurin:17-jre-jammy AS run
 WORKDIR /app
-ENV JAVA_OPTS=""
+ENV JAVA_OPTS="-Djava.net.preferIPv4Stack=true -Djava.security.egd=file:/dev/./urandom"
 COPY --from=build /app/target/todo-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
