@@ -1,0 +1,42 @@
+# 17-09 updated: Java/Maven/IDE ignores
+# Maven
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/
+
+# IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Environment files (do not commit secrets)
+.env
+.env.*
+
+# Spring Boot
+spring.log
+
+# Build output
+*.class
+
+# Node/npm if present
+node_modules/
+
+# Coverage & reports
+coverage/
+.site/

@@ -9,7 +9,7 @@ services:
       - key: PORT
         value: 8080
       - key: SPRING_DATASOURCE_URL
-        value: jdbc:postgresql://db.atxcccbzfelpmvbodljk.supabase.co:5432/postgres
+        value: jdbc:postgresql://YOUR_SUPABASE_HOST:5432/postgres?sslmode=require
       - key: SPRING_DATASOURCE_USERNAME
         value: postgres
       - key: SPRING_DATASOURCE_PASSWORD

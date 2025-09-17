@@ -1,0 +1,16 @@
+# 17-09 updated: reduce Docker build context
+.git
+.gitignore
+target
+node_modules
+.mvn
+.idea
+.vscode
+*.iml
+*.log
+logs
+Dockerfile*
+README.md
+api.rest
+docs
+**/*.md
