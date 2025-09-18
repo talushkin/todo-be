@@ -14,14 +14,13 @@ ENV JAVA_OPTS="-Djava.net.preferIPv4Stack=true \
     -Djava.net.useSystemProxies=true \
     -Dnetworkaddress.cache.ttl=60 \
     -Dnetworkaddress.cache.negative.ttl=10 \
+    -Dsun.net.useExclusiveBind=false \
     -Djava.security.egd=file:/dev/./urandom \
     -Dspring.datasource.hikari.connection-timeout=60000 \
     -Dspring.datasource.hikari.validation-timeout=5000"
 
-# Install DNS utilities and update DNS configuration
+# Install DNS utilities for debugging (no DNS config changes)
 RUN apt-get update && apt-get install -y dnsutils iputils-ping curl && \
-    echo "nameserver 8.8.8.8" > /etc/resolv.conf && \
-    echo "nameserver 8.8.4.4" >> /etc/resolv.conf && \
     rm -rf /var/lib/apt/lists/*
 
 COPY --from=build /app/target/todo-0.0.1-SNAPSHOT.jar app.jar
