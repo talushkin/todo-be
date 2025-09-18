@@ -24,10 +24,24 @@ Content-Type: application/json
 
 {
   "title": "Test Task",
-  "description": "This is a test",
-  "dueDate": "2025-09-10",
-  "status": "open",
+  "description": "This is a test task created via API",
+  "dueDate": "2025-09-25",
+  "status": "PENDING",
   "assignee": "Alice"
+}
+
+### Create a new todo with user_id context (example for user_id=1)
+POST http://localhost:8080/todos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "User Specific Task",
+  "description": "Task assigned to user ID 1",
+  "dueDate": "2025-09-30",
+  "status": "IN_PROGRESS",
+  "assignee": "Alice",
+  "userId": 1
 }
 
 
@@ -37,7 +51,7 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "id": 11,
+  "id": 26,
   "title": "Updated Task",
   "description": "Updated description",
   "dueDate": "2025-09-12",
