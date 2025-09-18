@@ -10,7 +10,8 @@ FROM eclipse-temurin:17-jre-jammy AS run
 WORKDIR /app
 
 # Enhanced network configuration for cloud deployment
-ENV JAVA_OPTS="-Djava.net.preferIPv4Stack=true \
+ENV JAVA_OPTS="-Djava.net.preferIPv4Stack=false \
+    -Djava.net.preferIPv6Addresses=true \
     -Djava.net.useSystemProxies=true \
     -Dnetworkaddress.cache.ttl=60 \
     -Dnetworkaddress.cache.negative.ttl=10 \
@@ -19,8 +20,8 @@ ENV JAVA_OPTS="-Djava.net.preferIPv4Stack=true \
     -Dspring.datasource.hikari.connection-timeout=60000 \
     -Dspring.datasource.hikari.validation-timeout=5000"
 
-# Install DNS utilities for debugging (no DNS config changes)
-RUN apt-get update && apt-get install -y dnsutils iputils-ping curl && \
+# Install DNS utilities for debugging and test connectivity
+RUN apt-get update && apt-get install -y dnsutils iputils-ping curl net-tools && \
     rm -rf /var/lib/apt/lists/*
 
 COPY --from=build /app/target/todo-0.0.1-SNAPSHOT.jar app.jar
